@@ -1,6 +1,6 @@
 <script>
 	import { tick } from 'svelte';
-	import { panZoom } from '$lib/actions/pan-zoom';
+	import { panZoom, getPanzoom } from '$lib/actions/pan-zoom';
 	import { tooltip } from '$lib/actions/tooltip';
 	import { getCenter, getVertices } from '@/lib/feature-utils';
 
@@ -47,7 +47,7 @@
 		const { x, y } = getCenter(feature);
 		const rx = x - imageObject.width / 2;
 		const ry = y - imageObject.height / 2;
-		panzoomContainer.panzoom.pan(-rx * r, -ry * r, { relative: false, animate: true });
+		getPanzoom(panzoomContainer)?.pan(-rx * r, -ry * r, { relative: false, animate: true });
 	};
 
 	export const panToNextMarked = () => {
@@ -66,7 +66,7 @@
 		if (!nextMark) return;
 		nextMark.classList.add('active');
 		const feature = imageObject.features[nextMark.dataset.idx];
-		panzoomContainer.panzoom.zoom(5);
+		getPanzoom(panzoomContainer)?.zoom(5);
 		setTimeout(() => {
 			panToFeature(feature);
 			if (nextMark._tippy) setTimeout(() => nextMark._tippy.show(), 300);
@@ -77,7 +77,7 @@
 		if (!featureId || !imageObject.features) return;
 		const focusedFeature = imageObject.features[featureId];
 		if (!focusedFeature) return;
-		panzoomContainer.panzoom.zoom(5); // TODO: the zoom level should take account of the feature size somehow
+		getPanzoom(panzoomContainer)?.zoom(5); // TODO: the zoom level should take account of the feature size somehow
 		setTimeout(() => panToFeature(focusedFeature));
 	});
 </script>
