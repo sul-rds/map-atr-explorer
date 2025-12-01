@@ -39,7 +39,7 @@
 		if (imageObject.features) {
 			for (const [featureId, feature] of imageObject.features.entries()) {
 				if (feature.properties.text.toLowerCase().includes(search.toLowerCase())) {
-					matchedImages.add(imageObject.id);
+					matchedImages.add(/** @type {number} */ (imageObject.id));
 					totalMatches++;
 					if (matches.length >= maxResults) continue;
 					if (!imageBitmap) {
@@ -47,8 +47,8 @@
 					}
 					const { croppedBitmap, width, height } = getFeatureClip(imageBitmap, feature);
 					matches.push({
-						key: `${imageObject.id}-${featureId}`,
-						imageId: imageObject.id,
+						key: `${/** @type {number} */ (imageObject.id)}-${featureId}`,
+						imageId: /** @type {number} */ (imageObject.id),
 						imageName: imageObject.name,
 						featureId,
 						text: feature.properties.text,

@@ -29,12 +29,12 @@
 	let rows = liveQueryAllImageObjects(); // returns a svelte store
 
 	const headers = [
-		{ key: 'id', value: 'ID' },
-		{ key: 'name', value: 'Name' },
-		{ key: 'features', value: '# Features' },
-		{ key: 'size', value: 'Image Size' },
-		{ key: 'bytes', value: 'Size in Database' },
-		{ key: 'imageThumbBlob', value: 'Image' },
+		{ key: 'id', value: 'ID', empty: false },
+		{ key: 'name', value: 'Name', empty: false },
+		{ key: 'features', value: '# Features', empty: false },
+		{ key: 'size', value: 'Image Size', empty: false },
+		{ key: 'bytes', value: 'Size in Database', empty: false },
+		{ key: 'imageThumbBlob', value: 'Image', empty: false },
 		{ key: 'actions', empty: true }
 	];
 
