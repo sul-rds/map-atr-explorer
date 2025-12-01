@@ -2,3 +2,6 @@
 pnpm-lock.yaml
 package-lock.json
 yarn.lock
+
+# Ignore scripts documentation
+scripts/README.md
