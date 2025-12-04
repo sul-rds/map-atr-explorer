@@ -109,7 +109,11 @@
 			</svelte:fragment>
 			<svelte:fragment slot="cell" let:row let:cell>
 				{#if cell.key === 'imageThumbBlob'}
-					<img src={URL.createObjectURL(cell.value)} alt={row.name} height="80px" />
+					<img
+						src={URL.createObjectURL(cell.value)}
+						alt={row.name}
+						style="--aspect-ratio: {row.width} / {row.height}"
+					/>
 				{:else if cell.key === 'features'}
 					{#if cell.value}
 						{cell.value.length}
@@ -199,6 +203,11 @@
 		justify-content: center;
 	}
 
+	:global(.dataset-table :is(td)) {
+		min-height: 80px;
+		padding: 0.875rem;
+	}
+
 	:global(.dataset-table tr > :nth-child(2)) {
 		justify-content: left;
 	}
@@ -214,7 +223,12 @@
 	}
 
 	img {
+		aspect-ratio: var(--aspect-ratio);
+		display: block;
+		height: auto;
 		margin: 0.5rem 0;
+		max-height: 80px;
+		max-width: 100%;
 		transform-origin: 90% 10%;
 		transition: all 200ms ease-out;
 
