@@ -10,11 +10,11 @@ const panzoomInstances = new WeakMap();
  */
 export function panZoom(node) {
 	const panzoom = Panzoom(node, {
-		contain: 'outside',
+		// contain: 'outside',
 		canvas: true,
 		panOnlyWhenZoomed: false,
 		startScale: 1,
-		minScale: 1,
+		minScale: 0.125,
 		maxScale: 20
 	});
 	panzoomInstances.set(node, panzoom);
