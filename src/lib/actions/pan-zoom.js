@@ -12,7 +12,7 @@ export function panZoom(node) {
 	const panzoom = Panzoom(node, {
 		contain: 'outside',
 		canvas: true,
-		panOnlyWhenZoomed: true,
+		panOnlyWhenZoomed: false,
 		startScale: 1,
 		minScale: 1,
 		maxScale: 20

@@ -126,12 +126,11 @@
 	}
 
 	.panzoom-container {
+		aspect-ratio: var(--aspect-ratio);
 		display: flex;
 		justify-content: center;
-		height: 100%;
 		overflow: hidden;
 		position: relative;
-		width: 100%;
 
 		img {
 			max-height: 100%;
