@@ -43,11 +43,14 @@
 	/** @param {Feature} feature */
 	const panToFeature = (feature) => {
 		const dim = panzoomOuter.getBoundingClientRect();
-		const r = dim.height / imageObject.height;
+		const r =
+			imageObject.width > imageObject.height
+				? dim.width / imageObject.width
+				: dim.height / imageObject.height;
 		const { x, y } = getCenter(feature);
-		const rx = x - imageObject.width / 2;
-		const ry = y - imageObject.height / 2;
-		getPanzoom(panzoomContainer)?.pan(-rx * r, -ry * r, { relative: false, animate: true });
+		const rx = imageObject.width / 2 - x;
+		const ry = imageObject.height / 2 - y;
+		getPanzoom(panzoomContainer)?.pan(rx * r, ry * r, { relative: false, animate: true });
 	};
 
 	export const panToNextMarked = () => {
@@ -66,7 +69,7 @@
 		if (!nextMark) return;
 		nextMark.classList.add('active');
 		const feature = imageObject.features[nextMark.dataset.idx];
-		getPanzoom(panzoomContainer)?.zoom(5);
+		getPanzoom(panzoomContainer)?.zoom(5); // TODO: the zoom level should take account of the feature size somehow
 		setTimeout(() => {
 			panToFeature(feature);
 			if (nextMark._tippy) setTimeout(() => nextMark._tippy.show(), 300);
